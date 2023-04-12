@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="__CDN__/assets/libs/bootstrap-table/dist/bootstrap-table.min.css">
+<style type="text/css">
+    .panel-post {
+        position: relative;
+    }
+
+    h2.page-header {
+        margin: 10px 0 0 0;
+    }
+
+    .panel-body {
+        padding: 15px 15px 0;
+    }
+
+    .fixed-table-container {
+        border: none;
+    }
+
+    .bootstrap-table .table > thead > tr > th {
+        border-color: #f4f4f4;
+    }
+</style>
+
+
+<div id="content-container" class="container">
+    <div class="row">
+        <div class="col-md-3">
+            {include file="common/sidenav" /}
+        </div>
+        <div class="col-md-9">
+
+            <div class="panel panel-default panel-intro" style="padding:0;">
+
+                <div class="panel-body">
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="one">
+                            <div class="widget-body no-padding">
+                                <div id="toolbar" class="toolbar">
+                                    <a href="javascript:;" class="btn btn-primary btn-refresh" title="刷新"><i class="fa fa-refresh"></i> </a>
+
+                                    <a href="javascript:;" class="btn btn-danger btn-del btn-disabled disabled"><i class="fa fa-trash"></i> {:__('彻底删除')}</a>
+                                    <a href="javascript:;" class="btn btn-success btn-recover btn-disabled disabled"><i class="fa fa-reply-all"></i> {:__('恢复')}</a>
+
+                                </div>
+
+                                <table id="table" class="table table-bordered table-hover" width="100%">
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

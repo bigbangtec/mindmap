@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {include file="common/meta" /}
+    <link href="__CDN__/assets/css/user.css?v={$Think.config.site.version}" rel="stylesheet">
+    <link rel="stylesheet" href="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.css"/>
+</head>
+
+<body>
+
+<div class="editor-title">
+    <div class="l">
+        <div class="brand"><a href="{:url('index/jmind.jmind/index')}">Jmind</a></div>
+    </div>
+    <div class="ttl">{$mind_info['name']}</div>
+    <div class="person">
+        <div class="username" id="username">未登录</div>
+        <ul class="dropdown">
+            <li><a href="{:url('index/jmind.jmind/index')}">我的文档</a></li>
+            <li><a href="{:url('index/user/index')}">个人中心</a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="jsmind_container" style="top: 40px;"></div>
+
+<div id="jsmind-zoom-box">
+    <div class="nav-btn zoom-in" title="放大">
+        <div class="icon"></div>
+    </div>
+    <div class="nav-btn zoom-out" title="缩小">
+        <div class="icon"></div>
+    </div>
+
+    <div class="nav-btn root-center" title="定位到根节点">
+        <div class="icon"></div>
+    </div>
+</div>
+
+</body>
+
+<script src="__CDN__/assets/js/frontend/jmind/js/jquery.min.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.draggable.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.screenshot.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.menu.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.dragfile.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/js/xncolorpicker.min.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/js/fontstyle.js"></script>
+{include file="common/script" /}
+<script>
+    var JM = {
+        jm: null,
+        jmContainer: 'jsmind_container',
+        id: '{$mind_info["uuid"]}',
+        theme: '{$mind_info["theme"]}',
+        mode: '{$mind_info["mode"]}',
+        data: '',
+        share_salt_type: '{$mind_info["share_salt_type"]}',
+        share_salt: '',
+        jmind_token: '{$mind_info["jmind_token"]}',
+        editable: false,
+    }
+</script>
+<script src="__CDN__/assets/js/frontend/jmind/js/jmind.js"></script>
+</html>

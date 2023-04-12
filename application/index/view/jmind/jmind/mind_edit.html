@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {include file="common/meta" /}
+    <link rel="stylesheet" href="__CDN__/assets/css/user.css?v={$Think.config.site.version}">
+    <link rel="stylesheet" href="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.css"/>
+</head>
+
+<body>
+
+<div class="editor-title">
+    <div class="l">
+        <div class="brand"><a href="{:url('index/jmind.jmind/index')}">Jmind</a></div>
+        <div class="btn-save" data-type="json" title="Ctrl+S 保存">保存</div>
+        <div class="jm-status hide" id="jm-status">准备就绪</div>
+    </div>
+    <div class="ttl">{$mind_info['name']}</div>
+    <div class="person">
+        <div class="username" id="username">未登录</div>
+        <ul class="dropdown">
+            <li><a href="{:url('index/jmind.jmind/index')}">我的文档</a></li>
+            <li><a href="{:url('index/user/index')}">个人中心</a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="jsmind_container"></div>
+
+
+<div id="toolbox">
+    <div class="nav-tab edit-node mr-5">
+        <div class="nav-btn add-brother-node disabled" title="Enter 添加同级节点">
+            <div class="icon"></div>
+            添加同级节点
+        </div>
+        <div class="nav-btn add-child-node disabled mt-2" title="Tab 添加下级节点">
+            <div class="icon"></div>
+            添加下级节点
+        </div>
+    </div>
+    <div class="nav-tab edit-node">
+        <div class="nav-btn add-parent-node disabled" title="添加上级节点">
+            <div class="icon"></div>
+            添加上级节点
+        </div>
+        <div class="nav-btn expand-node mt-2" title="展开节点">
+            <div class="icon"></div>
+            展开节点
+            <ul class="expand-list">
+                <li data-level="all" title="Ctrl+0 全部展开">全部展开</li>
+                <li data-level="1" title="Ctrl+1 展开到一级节点">展开到一级节点</li>
+                <li data-level="2" title="Ctrl+2 展开到二级节点">展开到二级节点</li>
+                <li data-level="3" title="Ctrl+3 展开到三级节点">展开到三级节点</li>
+                <li data-level="4" title="Ctrl+4 展开到四级节点">展开到四级节点</li>
+                <li data-level="5" title="Ctrl+5 展开到五级节点">展开到五级节点</li>
+                <li data-level="6" title="Ctrl+6 展开到六级节点">展开到六级节点</li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav-tab nav-line"></div>
+    <div class="nav-tab import-box mr-5">
+        <div class="nav-btn btn-import" title="导入">
+            <div class="icon"></div>
+            导入
+        </div>
+        <div class="nav-btn btn-outport mt-2" title="导出">
+            <div class="icon"></div>
+            导出
+        </div>
+    </div>
+    <div class="nav-tab move-node mr-5">
+        <div class="nav-btn btn-up-node disabled" title="Ctrl+↑ 上移">
+            <div class="icon"></div>
+            上移
+        </div>
+        <div class="nav-btn btn-down-node disabled mt-2" title="Ctrl+↓ 下移">
+            <div class="icon"></div>
+            下移
+        </div>
+    </div>
+    <div class="nav-tab edit-node-cont">
+        <div class="nav-btn btn-edit-node disabled" title="Insert 编辑">
+            <div class="icon"></div>
+            编辑
+        </div>
+        <div class="nav-btn btn-del-node disabled mt-2" title="Delete 删除">
+            <div class="icon"></div>
+            删除
+        </div>
+    </div>
+    <div class="nav-tab nav-line"></div>
+
+    <div class="nav-tab edit-theme">
+        <div class="btn-select-theme {$mind_info['theme']}">{$theme_list[$mind_info["theme"]]}</div>
+        <ul class="theme-list">
+            {volist name="$theme_list" id="item"}
+            <li class="{$key}" data-theme="{$key}">{$item}</li>
+            {/volist}
+        </ul>
+    </div>
+
+    <div class="nav-tab edit-mode">
+        <ul class="mode-list">
+            <li class="mode-full {$mind_info['mode']=='full'?'selected':''}" data-mode="full" title="思维导图"></li>
+            <li class="mode-side {$mind_info['mode']=='side'?'selected':''}" data-mode="side" title="逻辑结构图"></li>
+        </ul>
+    </div>
+
+    <div class="nav-tab nav-line"></div>
+    <div class="nav-tab edit-font mr-5">
+        <div class="nav-btn edit-fontfamily toggle-box disabled">
+            <div class="ttl" title="选择字体">字体</div>
+            <ul class="toggle-list"></ul>
+        </div>
+        <div class="nav-btn edit-fontsize mt-2 toggle-box disabled">
+            <div class="ttl" title="选择字号">字号</div>
+            <ul class="toggle-list"></ul>
+        </div>
+    </div>
+    <div class="nav-tab edit-font mr-5">
+        <div class="nav-btn edit-fontweight disabled">
+            <div class="ttl" title="粗体">B</div>
+        </div>
+        <div class="nav-btn edit-fontstyle disabled mt-2">
+            <div class="ttl" style="斜体">I</div>
+        </div>
+    </div>
+    <div class="nav-tab edit-font">
+        <div class="nav-btn edit-fontcolor colorpicker disabled">
+            <div class="ttl">字体颜色</div>
+            <div class="pre-color"></div>
+            <div id="fontcolorpicker" class="color"></div>
+        </div>
+        <div class="nav-btn edit-bgcolor mt-2 colorpicker disabled">
+            <div class="ttl">背景颜色</div>
+            <div class="pre-color"></div>
+            <div id="bgcolorpicker" class="color"></div>
+        </div>
+    </div>
+    <div class="nav-tab edit-line">
+        <div class="nav-btn edit-line-color colorpicker">
+            <div class="ttl">线条颜色</div>
+            <div class="pre-color"></div>
+            <div id="linecolorpicker" class="color"></div>
+        </div>
+        <div class="nav-btn edit-line-width toggle-box mt-2">
+            <div class="ttl">线条宽度</div>
+            <ul class="toggle-list">
+                <li data-w="1">1</li>
+                <li data-w="2">2</li>
+                <li data-w="3">3</li>
+                <li data-w="4">4</li>
+                <li data-w="5">5</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div id="jsmind-zoom-box">
+    <div class="nav-btn zoom-in" title="滑轮向上滚动 放大">
+        <div class="icon"></div>
+    </div>
+    <div class="nav-btn zoom-out" title="滑轮向下滚动 缩小">
+        <div class="icon"></div>
+    </div>
+
+    <div class="nav-btn root-center" title="定位到根节点">
+        <div class="icon"></div>
+    </div>
+</div>
+
+<div id="jsmind-outport-box">
+    <div class="jsmind-outport-list">
+        <div class="li" data-type="jm">Jmind格式(.jm)
+            <div class="tip">导出后可导入</div>
+        </div>
+        <div class="li" data-type="mm">Freemind格式(.mm)
+            <div class="tip">导出后可导入</div>
+        </div>
+        <div class="li" data-type="png">PNG图片(.png)
+            <div class="tip">导出后不可导入</div>
+        </div>
+    </div>
+</div>
+
+<div id="jsmind-import-box">
+    <div class="jsmind-import drag-box">
+        <div class="upload">上传文件</div>
+        <input class="upload-file" type="file">
+        <div class="desc">或将文件拖动到这里</div>
+        <div class="tip">支持Jmind格式、Freemind格式</div>
+    </div>
+</div>
+
+</body>
+
+<script src="__CDN__/assets/js/frontend/jmind/js/jquery.min.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.draggable.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.screenshot.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.menu.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/jsmind/jsmind.dragfile.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/js/xncolorpicker.min.js"></script>
+<script src="__CDN__/assets/js/frontend/jmind/js/fontstyle.js"></script>
+{include file="common/script" /}
+<script>
+    var JM = {
+        jm: null,
+        jmContainer: 'jsmind_container',
+        id: '{$mind_info["uuid"]}',
+        name: '{$mind_info["name"]}',
+        theme: '{$mind_info["theme"]}',
+        mode: '{$mind_info["mode"]}',
+        data: '{$mind_info["data"]}',
+        share_salt_type: '',
+        share_salt: '',
+        jmind_token: '',
+        editable: true,
+    }
+</script>
+<script src="__CDN__/assets/js/frontend/jmind/js/jmind.js"></script>
+</html>

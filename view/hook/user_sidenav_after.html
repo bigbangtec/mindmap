@@ -1,0 +1,12 @@
+<ul class="list-group">
+    <li class="list-group-heading">{:__('Jmind脑图')}</li>
+    <li class="list-group-item {:check_nav_active('jmind.jmind/index')}">
+        <a href="{:url('index/jmind.jmind/index')}"><i class="fa fa-file fa-fw"></i> {:__('我的文档')}</a>
+    </li>
+    <li class="list-group-item {:check_nav_active('jmind.jmind/share')}">
+        <a href="{:url('index/jmind.jmind/share')}"><i class="fa fa-share-alt fa-fw"></i> {:__('我的分享')}</a>
+    </li>
+    <li class="list-group-item {:check_nav_active('jmind.jmind/recycle')}">
+        <a href="{:url('index/jmind.jmind/recycle')}"><i class="fa fa-recycle fa-fw"></i> {:__('回收站')}</a>
+    </li>
+</ul>

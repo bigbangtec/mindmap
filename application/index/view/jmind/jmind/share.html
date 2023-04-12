@@ -1,0 +1,163 @@
+<link rel="stylesheet" href="__CDN__/assets/libs/bootstrap-table/dist/bootstrap-table.min.css">
+<style type="text/css">
+    .panel-post {
+        position: relative;
+    }
+
+    h2.page-header {
+        margin: 10px 0 0 0;
+    }
+
+    .panel-body {
+        padding: 15px 15px 0;
+    }
+
+    .fixed-table-container {
+        border: none;
+    }
+
+    .bootstrap-table .table > thead > tr > th {
+        border-color: #f4f4f4;
+    }
+</style>
+
+
+<div id="content-container" class="container">
+    <div class="row">
+        <div class="col-md-3">
+            {include file="common/sidenav" /}
+        </div>
+        <div class="col-md-9">
+
+            <div class="panel panel-default panel-intro" style="padding:0;">
+
+                <div class="panel-body">
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="one">
+                            <div class="widget-body no-padding">
+                                <div id="toolbar" class="toolbar">
+                                    <a href="javascript:;" class="btn btn-primary btn-refresh" title="刷新"><i
+                                            class="fa fa-refresh"></i> </a>
+
+                                    <a href="javascript:;" class="btn btn-danger btn-del btn-disabled disabled"><i
+                                            class="fa fa-trash"></i> {:__('删除')}</a>
+
+                                </div>
+
+                                <table id="table" class="table table-bordered table-hover" width="100%">
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .share-set-dialog {
+        display: none;
+        padding: 30px 30px 0 30px;
+    }
+
+    .share-set-dialog .link-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .share-set-dialog .link-box .link {
+        flex: 1;
+        background: #f0f0f0;
+        border-radius: 5px;
+        padding: 0 10px;
+        height: 34px;
+        line-height: 34px;
+        overflow: hidden;
+        color: #0a4b3e;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .share-set-dialog .link-box .copy {
+        padding: 0 10px;
+        margin: 0 10px;
+        height: 34px;
+        line-height: 34px;
+    }
+
+    .share-set-dialog .link-box .switch {
+        height: 34px;
+        line-height: 34px;
+        padding: 2px 0 0;
+    }
+
+    .share-set-dialog .other-box {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px 0 0;
+    }
+
+    .share-set-dialog .form-group {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .share-set-dialog .control-label {
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .share-set-dialog .input {
+        height: 30px;
+        line-height: 30px;
+        width: 80px;
+    }
+
+    .share-set-dialog .tip {
+        padding: 0 0 0 8px;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .share-off .link-box .link {
+        color: #999;
+    }
+
+    .share-off .link-box .copy {
+        background: #999;
+    }
+
+    .share-off .link-box .switch {
+        color: #999;
+    }
+
+    .share-off .other-box {
+        display: none;
+    }
+</style>
+<div id="share-set-dialog" class="share-set-dialog">
+    <div class="link-box">
+        <div class="link" id="share-link"></div>
+        <div class="copy btn btn-success">复制分享</div>
+        <div class="switch fa fa-toggle-on text-success fa-3x"></div>
+    </div>
+
+    <div class="other-box">
+        <div class="form-group">
+            <div class="control-label">生效时间：</div>
+            <div class="input"><input class="form-control" name="time" value="" maxlength="6" type="number"></div>
+            <div class="tip"> 分钟</div>
+        </div>
+        <div class="form-group">
+            <div class="control-label">设置密码：</div>
+            <div class="input"><input class="form-control" name="pass" value="" maxlength="4" type="password"></div>
+        </div>
+    </div>
+</div>
+
+<script data-render="script" src="/assets/js/frontend/jmind/js/clipboard.min.js"></script>
